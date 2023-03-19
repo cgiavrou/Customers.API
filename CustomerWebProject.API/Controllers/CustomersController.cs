@@ -26,5 +26,21 @@ namespace CustomerWebProject.API.Controllers
             
             return Ok(mapper.Map<List<Customer>>(customers));
         }
+
+        [HttpGet]
+        [Route("[controller]/{customerId:guid}")]
+        public async Task<IActionResult> GetCustomer([FromRoute] Guid customerId)
+        {
+            //Fetch Customer details
+            var customer = await customerRepository.GetCustomer(customerId);
+
+            //Return
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(mapper.Map<Customer>(customer));
+        }
     }
 }

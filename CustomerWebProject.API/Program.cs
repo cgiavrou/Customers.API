@@ -6,6 +6,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCors( (options) => 
+{
+    options.AddPolicy("angularApplication", (builder) =>
+        {
+            builder.WithOrigins("http://localhost:61461")
+            .AllowAnyHeader()
+            .WithMethods("GET", "POST", "PUT", "DELEte")
+            .WithExposedHeaders("*");
+        });
+});
 
 builder.Services.AddControllers();
 
@@ -29,6 +39,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("angularApplication");
 
 app.UseAuthorization();
 

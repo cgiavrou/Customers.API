@@ -17,5 +17,12 @@ namespace CustomerWebProject.API.Repositories
         {
             return await context.Customer.Include(nameof(PhoneNumber)).Include(nameof(ContactMode)).ToListAsync();
         }
+
+        public async Task<Customer> GetCustomer(Guid customerId)
+        {
+            return await context.Customer
+                .Include(nameof(PhoneNumber)).Include(nameof(ContactMode))
+                .FirstOrDefaultAsync(x => x.Id == customerId);
+        }
     }
 }
