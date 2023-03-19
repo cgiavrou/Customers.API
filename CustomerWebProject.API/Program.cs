@@ -1,11 +1,23 @@
+using CustomerWebProject.API.DataModels;
+using CustomerWebProject.API.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
 builder.Services.AddControllers();
+
+builder.Services.AddDbContext<CustomerContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("CustomerWebProjectDB")));
+
+builder.Services.AddScoped<ICustomerRepository, SqlCustomerRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
