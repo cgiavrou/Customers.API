@@ -21,7 +21,6 @@ namespace CustomerWebProject.API.Controllers
         [Route("[controller]")]
         public async Task<IActionResult> GetAllCustomers()
         {
-            
             var customers = await customerRepository.GetCustomers();
             
             return Ok(mapper.Map<List<Customer>>(customers));
@@ -41,6 +40,44 @@ namespace CustomerWebProject.API.Controllers
             }
 
             return Ok(mapper.Map<Customer>(customer));
+        }
+
+        [HttpPut]
+        [Route("[controller]/{customerId:guid}")]
+        public async Task<IActionResult> UpdateCustomer([FromRoute] Guid customerId, [FromBody] UpdateCustomerRequest request)
+        {
+            if (await customerRepository.Exists(customerId))
+            {
+                var updatedCustomer = await customerRepository.UpdateCustomer(customerId, mapper.Map<DataModels.Customer>(request));
+
+                return Ok(mapper.Map<Customer>(updatedCustomer));
+
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        [Route("[controller]/Add")]
+        public async Task<IActionResult> AddCustomer([FromRoute] AddCustomerRequest request)
+        {
+            var customer = await customerRepository.AddCustomer(mapper.Map<DataModels.Customer>(request));
+
+            return CreatedAtAction(nameof(GetCustomer), new { customerId = customer.Id }, mapper.Map<Customer>(customer));
+        }
+
+        [HttpDelete]
+        [Route("[controller]/{customerId:guid}")]
+        public async Task<IActionResult> DeleteCustomer([FromRoute] Guid customerId)
+        {
+            if (await customerRepository.Exists(customerId))
+            {
+                var customer = await customerRepository.DeleteCustomer(customerId);
+
+                return Ok(mapper.Map<Customer>(customer));
+            }
+
+            return NotFound();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CustomerWebProject.API.DataModels;
+using System.Reflection;
 
 namespace CustomerWebProject.API.Repositories
 {
@@ -7,5 +8,17 @@ namespace CustomerWebProject.API.Repositories
         Task<List<Customer>> GetCustomers();
 
         Task<Customer> GetCustomer(Guid customerId);
+
+        Task<List<ContactMode>> GetContactModes();
+        
+        Task<bool> Exists(Guid customerId);
+        
+        Task<Customer> UpdateCustomer(Guid customerId, Customer request);
+
+        Task<Customer> DeleteCustomer(Guid customerId);
+
+        Task<Customer> AddCustomer(Customer customer);
+
+
     }
 }

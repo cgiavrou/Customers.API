@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using CustomerWebProject.API.Controllers;
-using DataModels = CustomerWebProject.API.DataModels;
 using CustomerWebProject.API.DomainModels;
+using CustomerWebProject.API.Profiles.AfterMaps;
+using DataModels = CustomerWebProject.API.DataModels;
 
 namespace CustomerWebProject.API.Profiles
 {
@@ -17,6 +17,13 @@ namespace CustomerWebProject.API.Profiles
 
             CreateMap<DataModels.ContactMode, ContactMode>()
                 .ReverseMap();
+
+            CreateMap<AddCustomerRequest, DataModels.Customer>()
+                .AfterMap<AddCustomerRequestAfterMapping>();
+
+            CreateMap<UpdateCustomerRequest, DataModels.Customer>()
+                .AfterMap<UpdateCustomerRequestAfterMapping>();
+
         }
 
     }

@@ -10,5 +10,7 @@
 
         public long WorkPhone { get; set; }
 
+        //Navigation properties
+        public Guid CustomerId { get; set; }
     }
 }

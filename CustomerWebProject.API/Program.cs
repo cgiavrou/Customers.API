@@ -6,21 +6,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddCors( (options) => 
+/*builder.Services.AddCors( (options) => 
 {
-    options.AddPolicy("angularApplication", (builder) =>
+    options.AddPolicy("angularApplication", (polbuilder) =>
         {
-            builder.WithOrigins("http://localhost:61461")
+            polbuilder.WithOrigins("http://localhost:42000")
             .AllowAnyHeader()
-            .WithMethods("GET", "POST", "PUT", "DELEte")
+            .WithMethods("GET", "POST", "PUT", "DELETE")
             .WithExposedHeaders("*");
         });
 });
+*/
 
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<CustomerContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("CustomerWebProjectDB")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("CustomerDataVerseDB")));
 
 builder.Services.AddScoped<ICustomerRepository, SqlCustomerRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -42,7 +43,8 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseCors("angularApplication");
+//app.UseCors("angularApplication");
+app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseAuthorization();
 

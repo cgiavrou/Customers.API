@@ -12,7 +12,7 @@
 
         public string HomeAddress { get; set; }
 
-        public Guid ContactId { get; set; }
+        public Guid ContactModeId { get; set; }
         
         //Navigation Properties
         public ContactMode ContactMode { get; set; }
