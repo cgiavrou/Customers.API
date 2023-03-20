@@ -15,9 +15,6 @@ namespace CustomerWebProject.API.Profiles
             CreateMap<DataModels.PhoneNumber, PhoneNumber>()
                 .ReverseMap();
 
-            CreateMap<DataModels.ContactMode, ContactMode>()
-                .ReverseMap();
-
             CreateMap<AddCustomerRequest, DataModels.Customer>()
                 .AfterMap<AddCustomerRequestAfterMapping>();
 

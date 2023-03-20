@@ -8,6 +8,8 @@ namespace CustomerWebProject.API.Profiles.AfterMaps
         public void Process(AddCustomerRequest source, DataModels.Customer destination, ResolutionContext context)
         {
             destination.Id = Guid.NewGuid();
+            destination.FirstName = source.FirstName;
+            destination.Email = source.Email;
             destination.PhoneNumber = new DataModels.PhoneNumber()
             {
                 Id =   Guid.NewGuid(),

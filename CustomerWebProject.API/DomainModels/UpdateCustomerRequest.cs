@@ -10,8 +10,6 @@
 
         public string HomeAddress { get; set; }
 
-        public Guid ContactId { get; set; }
-
         public long Mobile { get; set; }
 
         public long HomePhone { get; set; }

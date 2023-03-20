@@ -10,26 +10,19 @@ namespace CustomerWebProject.API.Repositories
 
         public SqlCustomerRepository(CustomerContext context)
         {
-
             this.context = context;
-
         }
         
         public async Task<List<Customer>> GetCustomers()
         {
-            return await context.Customer.Include(nameof(PhoneNumber)).Include(nameof(ContactMode)).ToListAsync();
+            return await context.Customer.Include(nameof(PhoneNumber)).ToListAsync();
         }
 
         public async Task<Customer> GetCustomer(Guid customerId)
         {
             return await context.Customer
-                .Include(nameof(PhoneNumber)).Include(nameof(ContactMode))
+                .Include(nameof(PhoneNumber))
                 .FirstOrDefaultAsync(x => x.Id == customerId);
-        }
-
-        public async Task<List<ContactMode>> GetContactModes()
-        {
-            return await context.ContactMode.ToListAsync();
         }
 
         public async Task<bool> Exists(Guid customerId)
@@ -69,7 +62,6 @@ namespace CustomerWebProject.API.Repositories
                 existingCustomer.LastName = request.LastName;
                 existingCustomer.Email = request.Email;
                 existingCustomer.HomeAddress = request.HomeAddress;
-                existingCustomer.ContactModeId = request.ContactModeId;
                 existingCustomer.PhoneNumber.Mobile = request.PhoneNumber.Mobile;
                 existingCustomer.PhoneNumber.HomePhone = request.PhoneNumber.HomePhone;
                 existingCustomer.PhoneNumber.WorkPhone = request.PhoneNumber.WorkPhone;

@@ -9,8 +9,6 @@ namespace CustomerWebProject.API.Repositories
 
         Task<Customer> GetCustomer(Guid customerId);
 
-        Task<List<ContactMode>> GetContactModes();
-        
         Task<bool> Exists(Guid customerId);
         
         Task<Customer> UpdateCustomer(Guid customerId, Customer request);

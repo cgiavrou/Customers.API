@@ -11,8 +11,5 @@ namespace CustomerWebProject.API.DataModels
         public DbSet<Customer> Customer { get; set;}
 
         public DbSet<PhoneNumber> PhoneNumber { get; set;}
-
-        public DbSet<ContactMode> ContactMode { get; set;}
-
     }
 }
