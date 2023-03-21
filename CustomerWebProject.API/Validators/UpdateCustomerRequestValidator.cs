@@ -15,6 +15,7 @@ namespace CustomerWebProject.API.Validators
             RuleFor(x => x.Mobile).GreaterThan(99999).LessThan(10000000000);
             RuleFor(x => x.HomePhone).GreaterThan(99999).LessThan(10000000000);
             RuleFor(x => x.WorkPhone).GreaterThan(99999).LessThan(10000000000);
+            
         }
     }
 }

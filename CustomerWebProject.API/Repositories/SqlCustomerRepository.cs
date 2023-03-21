@@ -22,7 +22,8 @@ namespace CustomerWebProject.API.Repositories
         {
             return await context.Customer
                 .Include(nameof(PhoneNumber))
-                .FirstOrDefaultAsync(x => x.Id == customerId);
+                .FirstOrDefaultAsync(x => x.Id
+                == customerId);
         }
 
         public async Task<bool> Exists(Guid customerId)

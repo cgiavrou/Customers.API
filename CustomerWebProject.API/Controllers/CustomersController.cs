@@ -27,7 +27,7 @@ namespace CustomerWebProject.API.Controllers
         }
 
         [HttpGet]
-        [Route("[controller]/{customerId:guid}")]
+        [Route("[controller]/{customerId:guid}"), ActionName("GetCustomer")]
         public async Task<IActionResult> GetCustomer([FromRoute] Guid customerId)
         {
             //Fetch Customer details
@@ -59,7 +59,7 @@ namespace CustomerWebProject.API.Controllers
 
         [HttpPost]
         [Route("[controller]/Add")]
-        public async Task<IActionResult> AddCustomer([FromRoute] AddCustomerRequest request)
+        public async Task<IActionResult> AddCustomer([FromBody] AddCustomerRequest request)
         {
             var customer = await customerRepository.AddCustomer(mapper.Map<DataModels.Customer>(request));
 

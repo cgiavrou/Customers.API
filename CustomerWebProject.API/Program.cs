@@ -1,6 +1,7 @@
 using CustomerWebProject.API.DataModels;
 using CustomerWebProject.API.Repositories;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ var builder = WebApplication.CreateBuilder(args);
 */
 
 builder.Services.AddControllers();
+
+builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
 
 builder.Services.AddDbContext<CustomerContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("CustomerDataVerseDB")));
